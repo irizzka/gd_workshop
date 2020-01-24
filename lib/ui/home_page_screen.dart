@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         stream: bloc.movieStream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return buildMovieList(snapshot.data);
+            return _buildMovieList(snapshot.data);
           } else {
             return Center(child: CircularProgressIndicator());
           }
@@ -38,13 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
-  Widget buildMovieList(List<Movie> list) {
+  Widget _buildMovieList(List<Movie> list) {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return MovieItem();
+          return Container(child: MovieItem(list[index]));
         });
   }
 }
