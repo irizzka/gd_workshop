@@ -19,7 +19,7 @@ class MovieItem extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(9)),
             image: DecorationImage(
                 fit: BoxFit.fill,
-                image: NetworkImage(_item.url)),
+                image: NetworkImage("https://image.tmdb.org/t/p/w600_and_h900_bestv2${_item.posterPath}")),
             boxShadow: [
               BoxShadow(
                   color: Colors.black26,
@@ -32,7 +32,7 @@ class MovieItem extends StatelessWidget {
   }
 
   void _navigateToDetail(BuildContext context) {
-    Navigator.push(
+     Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => MovieDetailScreen(_item)));
   }

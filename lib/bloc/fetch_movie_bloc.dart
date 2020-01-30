@@ -1,20 +1,28 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_movi_demo/data/movie.dart';
 import 'package:flutter_movi_demo/networking/repository.dart';
+import 'package:rxdart/rxdart.dart';
 import 'base_bloc.dart';
 
 class MovieBloc extends Bloc {
-  final _repo = Repo();
+  final _repo = Repo.instance;
 
-  final _movieListStream = StreamController<List<Movie>>();
+  int pageCounter = 1;
+
+  final _movieListStream = BehaviorSubject<List<Movie>>();
+
+  MovieBloc(){
+    _movieListStream.sink.add([]);
+  }
 
   Stream<List<Movie>> get movieStream => _movieListStream.stream;
 
-  void fetchMovie() async {
-    var movies = await _repo.fetchMovie();
-    _movieListStream.sink.add(movies);
+  void fetchMovies() async {
+    var resp = await _repo.fetchMovie(pageCounter++);
+    _movieListStream.value.addAll(resp.movies);
+    _movieListStream.sink.add(_movieListStream.value);
+    print('fetch func');
   }
 
   @override

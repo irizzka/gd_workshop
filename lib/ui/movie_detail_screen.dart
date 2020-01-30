@@ -13,7 +13,7 @@ class MovieDetailScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("Movie"),
       ),
-      body: Center(child: Text(_detail.name)),
+      body: Center(child: Text(_detail.title)),
     );
   }
 }

@@ -12,16 +12,35 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+  ScrollController _scrollController = ScrollController();
+  var bloc;
+
+  @override
+  void initState() {
+    bloc = BlocProvider.of<MovieBloc>(context);
+    bloc.fetchMovies();
+    print('init');
+
+    _scrollController.addListener((){
+      if(_scrollController.position.pixels == _scrollController.position.maxScrollExtent ){
+        bloc.fetchMovies();
+        print('fwafwafaaaaaaaa');
+      }
+    }
+    );
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: buildBody(context),
     );
   }
 
   Widget buildBody(BuildContext context) {
-    var bloc = BlocProvider.of<MovieBloc>(context);
-    bloc.fetchMovie();
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 100),
@@ -31,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshot.hasData) {
             return _buildMovieList(snapshot.data);
           } else {
-            return Center(child: CircularProgressIndicator());
+           return Center(child: CircularProgressIndicator());
           }
         }
       ),
@@ -40,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildMovieList(List<Movie> list) {
     return ListView.builder(
+      controller: _scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: list.length,
         itemBuilder: (context, index) {

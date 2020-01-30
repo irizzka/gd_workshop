@@ -1,25 +1,20 @@
-import 'package:flutter_movi_demo/data/movie.dart';
+import 'package:flutter_movi_demo/networking/api.dart';
+import'package:dio/dio.dart';
+import 'package:flutter_movi_demo/networking/responce/movie_list_responce.dart';
+
+const String theMovieDBApiKey = '3d0d567b896c722ab267ed068e5cf805';
 
 class Repo {
-  static final Repo _instance = Repo._internal();
+  static final Repo instance = Repo._internal();
 
-  factory Repo() {
-    return _instance;
+  Dio _dioClient = Dio();
+  RestClient _restClient;
+
+  Repo._internal(){
+    _restClient = RestClient(_dioClient);
   }
 
-  Repo._internal();
-
-  Future<List<Movie>> fetchMovie() =>
-     Future.delayed(Duration(seconds: 3), () =>  movieSubs);
+  Future<MovieListResponce> fetchMovie(int pageNumber) async =>
+    await _restClient.getTasks(theMovieDBApiKey, pageNumber);
 }
 
-var movieSubs = [
-  Movie.defaultMovie(),
-  Movie.defaultMovie(),
-  Movie.defaultMovie(),
-  Movie.defaultMovie(),
-  Movie.defaultMovie(),
-  Movie.defaultMovie(),
-  Movie.defaultMovie(),
-  Movie.defaultMovie()
-];
