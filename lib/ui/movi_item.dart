@@ -11,7 +11,21 @@ class MovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => _navigateToDetail(context),
+      onLongPress: (){
+        print('long press ');
+      },
       child: Container(
+        child: Column(
+          children: <Widget>[
+            Container(child: Text(_item.title, style: TextStyle(
+              color: Colors.black
+            ),),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10)
+            ),),
+          ],
+        ),
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
         width: 250,
         decoration: BoxDecoration(

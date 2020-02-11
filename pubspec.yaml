@@ -28,7 +28,7 @@ dependencies:
   build_runner: ^1.0.0
   retrofit: any
   logger: any
-  retrofit_generator: any
+  retrofit_generator: 1.0.2
   rxdart: ^0.23.1
 
 dev_dependencies:

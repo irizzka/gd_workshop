@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
       bloc: MovieBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        theme: ThemeData.dark(),
         home: HomeScreen(),
       ),
     );

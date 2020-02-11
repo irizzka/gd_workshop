@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movi_demo/bloc/block_provider.dart';
 import 'package:flutter_movi_demo/bloc/fetch_movie_bloc.dart';
 import 'package:flutter_movi_demo/data/movie.dart';
+import 'package:flutter_movi_demo/ui/search_screen.dart';
+import 'package:flutter_movi_demo/ui/widgets/bottom_bar.dart';
 
 import 'movi_item.dart';
 
@@ -36,7 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Movies'),
+      ),
       body: buildBody(context),
+      bottomNavigationBar: BottomBar(),
     );
   }
 
@@ -67,4 +73,5 @@ class _HomeScreenState extends State<HomeScreen> {
         });
   }
 }
+
 

@@ -16,5 +16,8 @@ class Repo {
 
   Future<MovieListResponce> fetchMovie(int pageNumber) async =>
     await _restClient.getTasks(theMovieDBApiKey, pageNumber);
+
+  Future<MovieListResponce> searchMovie(int pageNumber, String movieName) async =>
+      await _restClient.getTasksBySearch(theMovieDBApiKey, pageNumber, movieName);
 }
 

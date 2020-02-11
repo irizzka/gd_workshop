@@ -10,6 +10,7 @@ const String baseUrl = 'http://api.themoviedb.org/3/';
 const String popularMovies = 'movie/popular';
 const String genres = 'genre/movie/list';
 const String discover = 'discover/movie';
+const String search = '/search';
 
 //query parameters
 const String withGenres = 'with_genres';
@@ -21,6 +22,11 @@ abstract class RestClient {
   @GET("movie/popular")
   Future<MovieListResponce> getTasks(
       @Query('api_key') String theMovieDBApiKey,
-      @Query('page') int page
-      );
+      @Query('page') int page);
+
+  @GET("movie/popular")
+  Future<MovieListResponce> getTasksBySearch(
+      @Query('api_key') String theMovieDBApiKey,
+      @Query('page') int page,
+      @Query('query') String query);
 }
